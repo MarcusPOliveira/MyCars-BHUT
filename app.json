@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "MyCars-BHUT",
+    "slug": "MyCars-BHUT",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
