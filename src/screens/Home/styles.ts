@@ -1,34 +1,39 @@
 import styled from 'styled-components/native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { RFValue } from "react-native-responsive-fontsize";
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 
 export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.background};
+  align-items: center;
 `;
 
-export const Header = styled.View`
-  width: 120%;
-  height: 22%;
-  margin-top: -50px;
-  margin-left: -20px;
-  background-color: ${({ theme }) => theme.colors.primary};
+export const Header = styled(LinearGradient).attrs(({ theme }) => ({
+  colors: theme.colors.gradient,
+  start: { x: 0.0, y: 0.4 },
+  end: { x: 0, y: 1.3 },
+}))`
+  width: 100%;
+  height: 25%;
   align-items: flex-start;
-  justify-content: center;
-  transform: skewY(-10deg);
-  padding: 40px;
+  padding: ${getStatusBarHeight() + 30}px 50px;
 `;
 
 export const Title = styled.Text`
   font-size: ${RFValue(25)}px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
-  transform: skewY(10deg);
-  margin-top: 20px;
 `;
 
 export const Content = styled.View`
+  width: 100%;
   height: 100%;
+  background-color: ${({ theme }) => theme.colors.background};
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  margin-top: -50px;
 `;
 
 export const CarsQuantityWrapper = styled.View`
@@ -36,7 +41,7 @@ export const CarsQuantityWrapper = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 40px 24px;
+  padding: 30px 24px;
 `;
 
 export const Subtitle = styled.Text`
@@ -51,7 +56,10 @@ export const Quantity = styled.Text`
   color: ${({ theme }) => theme.colors.text};
 `;
 
+export const List = styled.View``;
+
 export const Footer = styled.View`
   background-color: red;
+  width: 100%;
   align-items: center;
 `;

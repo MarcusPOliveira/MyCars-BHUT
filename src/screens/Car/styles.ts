@@ -57,10 +57,10 @@ export const Wrapper = styled.View`
 `;
 
 export const InputLabel = styled.Text`
-  font-size: ${RFValue(20)}px;
+  font-size: ${RFValue(18)}px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.text};
-  margin-top: 10px;
+  margin-top: 15px;
 `;
 
 export const InputGroup = styled.View`

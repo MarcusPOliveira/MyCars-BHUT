@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
 
+import { Load } from '../Load';
 import {
   Container,
   Label
@@ -8,12 +9,17 @@ import {
 
 type Props = TouchableOpacityProps & {
   title: string;
+  isLoading: boolean;
 }
 
-export function Button({ title, ...rest }: Props) {
+export function Button({ title, isLoading, ...rest }: Props) {
   return (
     <Container {...rest}>
-      <Label> {title} </Label>
+      {
+        isLoading
+          ? <Load />
+          : <Label> {title} </Label>
+      }
     </Container>
   );
 }

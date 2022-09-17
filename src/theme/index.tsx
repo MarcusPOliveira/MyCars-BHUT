@@ -9,6 +9,7 @@ export default {
     white: '#FFFFFF',
     background: '#F2F3F5',
     shape: '#B2B2B2',
+    gradient: ['#5356BF', '#30326e']
   },
 
   fonts: {

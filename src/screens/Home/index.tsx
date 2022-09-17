@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FlatList, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
+import api from '../../services/api';
+import { CarDTO } from '../../dtos/CarDTO';
+import { Load } from '../../components/Load';
 import { Card } from '../../components/Card';
 import { NewButton } from '../../components/NewButton';
 import {
@@ -12,16 +15,42 @@ import {
   CarsQuantityWrapper,
   Subtitle,
   Quantity,
+  List,
   Footer,
 } from './styles';
 
 export function Home() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [cars, setCars] = useState<CarDTO[]>([]);
 
   const navigation = useNavigation();
 
-  function handleOpenCar() {
+  function handleOpenCar(_id: string) {
+    navigation.navigate('car', { _id });
+  }
+
+  function handleNewCar() {
     navigation.navigate('car');
   }
+
+  async function fetchCars() {
+    setIsLoading(true);
+    try {
+      const response = await api.get(`/cars`);
+      setCars(response.data);
+    } catch (error) {
+      console.log("Opa, ocorreu um erro: ", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  console.log("Array de carros: ", cars);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchCars();
+    }, []));
 
   return (
     <Container>
@@ -33,15 +62,29 @@ export function Home() {
       <Content>
         <CarsQuantityWrapper>
           <Subtitle>Seus carros</Subtitle>
-          <Quantity>10</Quantity>
+          <Quantity>{cars.length}</Quantity>
         </CarsQuantityWrapper>
-        <View style={{ alignItems: 'center', }} >
-          <Card onPress={handleOpenCar} />
-        </View>
+        <List>
+          {
+            isLoading
+              ? <Load />
+              : (
+                <FlatList
+                  data={cars}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  keyExtractor={item => item._id}
+                  renderItem={({ item }) => (
+                    <Card data={item} onPress={() => handleOpenCar(item._id)} />
+                  )}
+                />
+              )
+          }
+        </List>
+        <Footer>
+          <NewButton onPress={handleNewCar} />
+        </Footer>
       </Content>
-      <Footer>
-
-      </Footer>
-    </Container>
+    </Container >
   );
 }

@@ -3,42 +3,38 @@ import { TouchableOpacityProps } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 
+import carImg from '../../assets/car.png';
+import { CarDTO } from '../../dtos/CarDTO';
 import {
   Container,
-  Content,
+  ImageWrapper,
+  Image,
+  ButtonContent,
   VehicleName,
   VehicleBrand,
-  RowGroup,
-  Label,
-  Price,
-  ExpandCard
 } from './styles';
 
 type Props = TouchableOpacityProps & {
-
+  data: CarDTO;
 }
 
-export function Card({ ...rest }: Props) {
+export function Card({ data, ...rest }: Props) {
 
   const { colors } = useTheme();
 
   return (
     <Container>
-      <Content>
-        <VehicleName>Fusca</VehicleName>
-        <VehicleBrand>Volkswagem</VehicleBrand>
-        <RowGroup>
-          <Label>Ano </Label>
-          <Label>1980</Label>
-        </RowGroup>
-        <RowGroup>
-          <Label>Preço: </Label>
-          <Price>R$15.000,00</Price>
-        </RowGroup>
-      </Content>
-      <ExpandCard {...rest}>
-        <FontAwesome5 name="chevron-right" size={24} color={colors.white} />
-      </ExpandCard>
+      <ButtonContent {...rest}>
+        <VehicleName>{data.title}</VehicleName>
+        <VehicleBrand>{data.brand}</VehicleBrand>
+        <FontAwesome5 name='chevron-down' size={20} color={colors.white} />
+      </ButtonContent>
+      <ImageWrapper>
+        <Image
+          source={carImg}
+          resizeMode="contain"
+        />
+      </ImageWrapper>
     </Container>
   );
 }
