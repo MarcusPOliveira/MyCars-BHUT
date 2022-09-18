@@ -113,7 +113,7 @@ export function Car({ data, ...rest }: Props) {
       }
     }
     fetchSelectedCar();
-  }, [_id]);
+  }, []);
 
   return (
     <Container>

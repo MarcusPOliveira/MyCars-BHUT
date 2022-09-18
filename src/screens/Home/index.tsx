@@ -29,8 +29,9 @@ export function Home() {
     navigation.navigate('car', { _id });
   }
 
-  function handleNewCar() {
-    navigation.navigate('car');
+  function handleNewCar(_id?: string) {
+    const route = _id ? '' : '';
+    navigation.navigate('car', { route });
   }
 
   async function fetchCars() {
