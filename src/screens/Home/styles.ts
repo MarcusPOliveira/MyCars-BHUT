@@ -56,10 +56,13 @@ export const Quantity = styled.Text`
   color: ${({ theme }) => theme.colors.text};
 `;
 
+export const FilterArea = styled.View`
+  margin: 30px 0px;
+`;
+
 export const List = styled.View``;
 
 export const Footer = styled.View`
-  background-color: red;
   width: 100%;
   align-items: center;
 `;

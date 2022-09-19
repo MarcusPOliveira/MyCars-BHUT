@@ -7,6 +7,6 @@ export function Load() {
   const { colors } = useTheme();
 
   return (
-    <ActivityIndicator size="large" color={colors.secondary} />
+    <ActivityIndicator size="large" color={colors.success} />
   );
 }

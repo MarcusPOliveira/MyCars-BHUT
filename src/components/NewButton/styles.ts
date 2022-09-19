@@ -8,6 +8,6 @@ export const Button = styled.TouchableOpacity`
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.success};
   position: absolute;
-  bottom: -350px;
+  bottom: -280px;
   right: 25px;
 `;
