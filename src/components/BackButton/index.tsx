@@ -5,13 +5,16 @@ import { useTheme } from 'styled-components';
 import {
   Button
 } from './styles';
+import { TouchableOpacityProps } from 'react-native';
 
-export function BackButton() {
+type Props = TouchableOpacityProps & {}
+
+export function BackButton({ ...rest }: Props) {
 
   const { colors } = useTheme();
 
   return (
-    <Button>
+    <Button {...rest}>
       <FontAwesome5 name="chevron-left" size={24} color={colors.white} />
     </Button>
   );

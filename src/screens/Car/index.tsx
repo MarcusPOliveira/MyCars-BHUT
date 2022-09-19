@@ -44,6 +44,10 @@ export function Car({ data, ...rest }: Props) {
   const route = useRoute();
   const { _id } = route.params as RouteParams;
 
+  function handleGoBack() {
+    navigation.goBack();
+  }
+
   async function handleAddNewCar() {
     if (!title || !brand || !age || !price) {
       Alert.alert('Opa!', 'Todas as informações devem ser preenchidas!');
@@ -141,7 +145,7 @@ export function Car({ data, ...rest }: Props) {
     <Container>
       <Header>
         <RowGroup>
-          <BackButton />
+          <BackButton onPress={handleGoBack} />
           <DeleteButton
             onPress={handleDeleteCar}
             {...rest}

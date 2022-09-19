@@ -18,7 +18,7 @@ export const Header = styled(LinearGradient).attrs(({ theme }) => ({
   width: 100%;
   height: 25%;
   align-items: flex-start;
-  padding: ${getStatusBarHeight() + 30}px 50px;
+  padding: ${getStatusBarHeight() + 20}px 50px;
 `;
 
 export const Title = styled.Text`
@@ -27,7 +27,9 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-export const Content = styled.View`
+export const Content = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false
+})`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.background};
@@ -64,5 +66,6 @@ export const List = styled.View``;
 
 export const Footer = styled.View`
   width: 100%;
-  align-items: center;
+  height: 100%;
+  align-items: flex-end;
 `;

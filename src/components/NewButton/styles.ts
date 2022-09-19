@@ -7,7 +7,5 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.success};
-  position: absolute;
-  bottom: -280px;
-  right: 25px;
+  margin: 70px 30px;
 `;

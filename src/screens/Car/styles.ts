@@ -9,7 +9,7 @@ export const Container = styled.KeyboardAvoidingView`
 
 export const Header = styled.View`
   height: 30%;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 export const RowGroup = styled.View`
@@ -34,11 +34,13 @@ export const ImageWrapper = styled.View`
 export const CarImage = styled.Image`
   width: 254px;
   height: 134px;
+  margin-bottom: 20px;
 `;
 
 export const Content = styled.ScrollView.attrs({
   contentContainerStyle: {
     paddingTop: 20,
+    paddingBottom: 20
   }
 })`
   border-top-left-radius: 50px;

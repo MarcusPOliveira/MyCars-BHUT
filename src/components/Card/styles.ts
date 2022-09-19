@@ -3,8 +3,8 @@ import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
   width: 159px;
-  height: 196px;
-  margin-left: 20px;
+  height: 220px;
+  margin: 0px 12px;
 `;
 
 export const ImageWrapper = styled.View`
@@ -33,13 +33,14 @@ export const ButtonContent = styled.TouchableOpacity`
 `;
 
 export const VehicleName = styled.Text`
-  font-size: ${RFValue(18)}px;
+  font-size: ${RFValue(20)}px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
+  text-align: center;
 `;
 
 export const VehicleBrand = styled.Text`
-  font-size: ${RFValue(14)}px;
+  font-size: ${RFValue(16)}px;
   font-family: ${({ theme }) => theme.fonts.regular};
   color: ${({ theme }) => theme.colors.white};
 `;
