@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { FlatList, Alert } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
@@ -43,15 +43,13 @@ export function Home() {
     try {
       const response = await api.get(`/cars/`);
       setCars(response.data);
-      console.log(cars)
+      //console.log("Array de carros: ", cars);
     } catch (error) {
       console.log("Opa, ocorreu um erro: ", error);
     } finally {
       setIsLoading(false);
     }
   }
-
-  //console.log("Array de carros: ", cars);
 
   function handleClearSearch() {
     setSearch('');
@@ -75,6 +73,7 @@ export function Home() {
   useFocusEffect(
     useCallback(() => {
       fetchCars();
+      handleClearSearch();
     }, []));
 
   return (

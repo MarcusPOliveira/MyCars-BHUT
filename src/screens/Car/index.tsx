@@ -5,6 +5,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import carImg from '../../assets/car.png';
 import api from '../../services/api';
 import { CarDTO } from '../../dtos/CarDTO';
+import { Load } from '../../components/Load';
 import { BackButton } from '../../components/BackButton';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
@@ -23,7 +24,6 @@ import {
   InputGroup,
   Footer,
 } from './styles';
-import { Load } from '../../components/Load';
 
 type RouteParams = {
   _id: string;
@@ -45,27 +45,31 @@ export function Car({ data, ...rest }: Props) {
   const { _id } = route.params as RouteParams;
 
   async function handleAddNewCar() {
-    setIsLoading(true);
-    try {
-      await api.post('/cars', {
-        id: new Date().toString(),
-        title,
-        brand,
-        age,
-        price: parseInt(price)
-      }).then((response) => {
-        console.log(response.data)
-        Alert.alert('Parabéns!', 'Seu carro foi cadastrado com sucesso!');
-        navigation.navigate('home');
-      }).catch((error) => {
+    if (!title || !brand || !age || !price) {
+      Alert.alert('Opa!', 'Todas as informações devem ser preenchidas!');
+    } else {
+      setIsLoading(true);
+      try {
+        await api.post('/cars', {
+          id: new Date().toString(),
+          title,
+          brand,
+          age,
+          price: parseInt(price)
+        }).then((response) => {
+          console.log(response.data)
+          Alert.alert('Parabéns!', 'Seu carro foi cadastrado com sucesso!');
+          navigation.navigate('home');
+        }).catch((error) => {
+          Alert.alert('Opa!', 'Algo deu errado!');
+          console.log("Erro: ", error);
+        })
+      } catch (error) {
         Alert.alert('Opa!', 'Algo deu errado!');
-        console.log("Erro: ", error);
-      })
-    } catch (error) {
-      Alert.alert('Opa!', 'Algo deu errado!');
-      console.log(error);
-    } finally {
-      setIsLoading(false)
+        console.log(error);
+      } finally {
+        setIsLoading(false)
+      }
     }
   }
 
@@ -122,7 +126,7 @@ export function Car({ data, ...rest }: Props) {
           setTitle(car.title);
           setBrand(car.brand);
           setAge(car.age.toString());
-          setPrice(car.price);
+          setPrice(car.price.toString());
           ToastAndroid.show('Carro selecionado', ToastAndroid.LONG);
         }
       } catch (error) {
@@ -168,6 +172,7 @@ export function Car({ data, ...rest }: Props) {
           <Input
             iconName='car-side'
             placeholder='Digite o modelo do veículo...'
+            autoCapitalize='words'
             value={title}
             onChangeText={setTitle}
           />
@@ -179,6 +184,7 @@ export function Car({ data, ...rest }: Props) {
           <Input
             iconName='bimobject'
             placeholder='Digite a marca do veículo...'
+            autoCapitalize='words'
             value={brand}
             onChangeText={setBrand}
           />
