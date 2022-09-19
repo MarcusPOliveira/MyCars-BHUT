@@ -6,7 +6,7 @@ export const Button = styled.TouchableOpacity`
   border-radius: 35px;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.success};
   position: absolute;
   bottom: -350px;
   right: 25px;

@@ -23,6 +23,7 @@ import {
   InputGroup,
   Footer,
 } from './styles';
+import { Load } from '../../components/Load';
 
 type RouteParams = {
   _id: string;
@@ -69,15 +70,30 @@ export function Car({ data, ...rest }: Props) {
   }
 
   async function handleUpdateCar() {
+    setIsLoading(true);
     try {
-
+      await api.put(`/cars/${_id}`, {
+        title,
+        brand,
+        age,
+        price
+      }).then((response) => {
+        if (response.status === 200) {
+          console.log(response.status);
+          Alert.alert('Parabéns!', 'Dados alterados com sucesso!');
+          navigation.navigate('home');
+        }
+      })
     } catch (error) {
       console.log(error);
       Alert.alert('Opa!', 'Erro ao atualizar carro!');
+    } finally {
+      setIsLoading(false);
     }
   }
 
   async function handleDeleteCar() {
+    setIsLoading(true);
     try {
       await api.delete(`/cars/${_id}`)
         .then((response) => {
@@ -91,6 +107,8 @@ export function Car({ data, ...rest }: Props) {
     } catch (error) {
       console.log(error);
       Alert.alert('Opa!', 'Erro ao deletar carro!');
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -120,10 +138,17 @@ export function Car({ data, ...rest }: Props) {
       <Header>
         <RowGroup>
           <BackButton />
-          <DeleteButton onPress={handleDeleteCar} {...rest}>
-            <DeleteLabel>
-              Deletar
-            </DeleteLabel>
+          <DeleteButton
+            onPress={handleDeleteCar}
+            {...rest}
+          >
+            {
+              isLoading
+                ? <Load />
+                : <DeleteLabel>
+                  Deletar
+                </DeleteLabel>
+            }
           </DeleteButton>
         </RowGroup>
         <ImageWrapper>
@@ -183,7 +208,11 @@ export function Car({ data, ...rest }: Props) {
           />
         </InputGroup>
         <Footer>
-          <Button title={_id ? "Salvar Alterações" : "Cadastrar"} isLoading={isLoading} onPress={_id ? handleUpdateCar : handleAddNewCar} />
+          <Button
+            title={_id ? "Salvar Alterações" : "Cadastrar"}
+            isLoading={isLoading}
+            onPress={_id ? handleUpdateCar : handleAddNewCar}
+          />
         </Footer>
       </Content>
     </Container>

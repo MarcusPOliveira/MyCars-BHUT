@@ -30,7 +30,7 @@ export function Home() {
   }
 
   function handleNewCar(_id?: string) {
-    const route = _id ? '' : '';
+    const route = _id ? '' : ''; //'zerando' id ao clicar para criar novo carro
     navigation.navigate('car', { route });
   }
 
@@ -83,7 +83,7 @@ export function Home() {
           }
         </List>
         <Footer>
-          <NewButton onPress={handleNewCar} />
+          <NewButton onPress={() => handleNewCar()} />
         </Footer>
       </Content>
     </Container >
