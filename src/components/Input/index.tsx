@@ -3,6 +3,7 @@ import { TextInputProps } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 
+import { maskPrice } from '../../utils/masks';
 import {
   Container,
   IconContainer,
@@ -12,9 +13,11 @@ import {
 type Props = TextInputProps & {
   iconName?: React.ComponentProps<typeof FontAwesome5>['name'];
   value?: string;
+  mask?: 'price';
+  inputMaskChange?: any;
 }
 
-export function Input({ iconName, value, ...rest }: Props) {
+export function Input({ iconName, value, mask, inputMaskChange, ...rest }: Props) {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
@@ -27,6 +30,13 @@ export function Input({ iconName, value, ...rest }: Props) {
   function handleInputBlur() {
     setIsFocused(false);
     setIsFilled(!!value);
+  }
+
+  function handleUseMask(text: string) {
+    if (mask === 'price') {
+      const value = maskPrice(text);
+      inputMaskChange(value);
+    }
   }
 
   return (
@@ -43,6 +53,7 @@ export function Input({ iconName, value, ...rest }: Props) {
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         value={value}
+        onChangeText={(text) => handleUseMask(text)}
         {...rest}
       />
     </Container>

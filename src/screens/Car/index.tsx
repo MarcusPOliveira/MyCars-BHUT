@@ -58,10 +58,10 @@ export function Car({ data, ...rest }: Props) {
           id: new Date().toString(),
           title,
           brand,
-          age,
-          price: parseInt(price)
+          age: parseInt(age),
+          price
         }).then((response) => {
-          console.log(response.data)
+          console.log(response.data);
           Alert.alert('Parabéns!', 'Seu carro foi cadastrado com sucesso!');
           navigation.navigate('home');
         }).catch((error) => {
@@ -211,10 +211,11 @@ export function Car({ data, ...rest }: Props) {
         <InputGroup>
           <Input
             iconName='dollar-sign'
-            placeholder='Digite o valor do veículo...'
+            placeholder='R$0000,00'
             keyboardType='numeric'
             value={price}
-            onChangeText={setPrice}
+            mask="price"
+            inputMaskChange={(text: string) => setPrice(text)}
           />
         </InputGroup>
         <Footer>

@@ -1,11 +1,11 @@
 import React from 'react';
+import { TouchableOpacityProps } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 
 import {
   Button
 } from './styles';
-import { TouchableOpacityProps } from 'react-native';
 
 type Props = TouchableOpacityProps & {}
 
